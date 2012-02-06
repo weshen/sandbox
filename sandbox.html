@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Westa HTML5 Lab</title>
+		<link rel="stylesheet" href="skin/main.css" />
+		<scripts src="lib/js/jquery-1.7.1.js" type="text/javascript"></scripts>
+		<scripts src="lib/js/jquery.quicksand.js" type="text/javascript"></scripts>
+		
+		<script type="text/javascript">
+			// Start - Draggable functions...
+			function dropAllow(e)
+			{ 
+				e.preventDefault();
+			} 
+			
+			function drag(e)
+			{ 
+				e.dataTransfer.setData("Text",e.target.id);
+			} 
+
+			function drop(e)
+			{ 
+				var data=e.dataTransfer.getData("Text");
+				e.target.appendChild(document.getElementById(data));
+				e.preventDefault();
+			}
+			// End - Draggable functions....
+		</script>
+	</head>
+	<body>
+
+		<!-- Draggable feature, making it possible to drop the element on the video area -->
+		<div id="idDragMe" draggable="true" ondragstart="drag(event)" style="font: Verdana;font-size: 20px;">
+			Westa sandbox <i>(this text is draggable...)</i>
+		</div>
+		
+		<!-- Start HTML5 elements -->
+			
+			<!-- Media elements -->
+			
+			<div style="text-align:left">
+				<audio id="idWestaSound" controls="controls" draggable="true">
+					<source src="asset/game_vp_jpm_music_theme_loop.ogg" type="audio/ogg"></source>
+					<source src="asset/game_tss_double_up_lose.wav" type="audio/wav"></source>
+					<source src="asset/game_hps_idle_music_loop.mp3" type="audio/mpeg"></source>
+					Your browser does not support the sound tag. Following browser support video format(s).
+						
+						IE 9: mp3 only
+						Firefox 4.0: ogg and wav
+						Chrome 6: mp3, ogg and wav
+						Safari 5: mp3 and wav
+						Opera 10.6: ogg and wav
+				</audio>
+			</div>
+			
+			
+			<div style="text-align:center">
+				<button onclick="videoPause()">Play/Pause</button> 
+				<button onclick="videoMute()">Mute</button> 
+				<button onclick="videoBig()">Big</button>
+				<button onclick="videoSmall()">Small</button>
+				<button onclick="videoNormal()">Normal</button>
+				<br /> 
+				<video id="idWestaVideo" width="320" height="240" ondrop="drop(event)" ondragover="dropAllow(event)">
+					<source src="asset/CSI_Intro_720p.mp4" type="video/mp4"></source>
+					<!-- 
+					<source src="asset/Vida_Arena_720p.mp4" type="video/mp4"></source>
+					 -->
+					<source src=".ogg" type="video/ogg"></source>
+					Your browser does not support the video tag. Following browser support video format(s).
+					
+					IE 9: mp4 only
+					Firefox 4.0: ogg and webm
+					Chrome 6: mp4, ogg and webm
+					Safari 5: mp4 only
+					Opera 10.6: ogg and webm
+				</video>
+			</div>
+
+			<!-- 
+			DOM control video tag 
+			See methods, properties and events here:
+			http://www.w3schools.com/html5/html5_video_dom.asp
+			-->
+			<script type="text/javascript"> 
+				var mySound=document.getElementById("idWestaSound");
+				var myVideo=document.getElementById("idWestaVideo"); 
+				
+				function videoPause()
+				{ 
+				if (myVideo.paused) 
+				  myVideo.play(); 
+				else 
+				  myVideo.pause(); 
+				} 
+				
+				function videoBig()
+				{ 
+				//myVideo.height=(myVideo.videoHeight*2);
+				myVideo.height=360;
+				myVideo.width=640;
+				} 
+				
+				function videoSmall()
+				{ 
+				//myVideo.height=(myVideo.videoHeight/2);
+				myVideo.height=90;
+				myVideo.width=160;
+				} 
+				
+				function videoNormal()
+				{ 
+				//myVideo.height=(myVideo.videoHeight);
+				myVideo.height=180;
+				myVideo.width=320;
+				}
+				
+				function videoMute()
+				{ 
+				if (myVideo.muted) 
+					myVideo.muted=false; 
+				else 
+					myVideo.muted=true;
+				} 
+				
+			</script> 
+
+			<!-- Canvas -->
+
+	
+			<canvas></canvas>
+			
+			<!-- Form elements -->			
+			<datalist ></datalist>
+				<keygen></keygen>
+				<output></output>
+				
+		<!-- End HTML5 elements -->	
+			
+	</body>
+</html>
+	
