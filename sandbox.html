@@ -9,6 +9,11 @@
 		
 		<script type="text/javascript">
 			// Start - Draggable functions...
+			
+			/* dropAllow(e)
+			By default, data/elements cannot be dropped in other elements
+			To allow a drop we must prevent the default handling of the element	
+			*/
 			function dropAllow(e)
 			{ 
 				e.preventDefault();
@@ -19,8 +24,17 @@
 				e.dataTransfer.setData("Text",e.target.id);
 			} 
 
+			/* drop(e)
+			Get the dragged data with the dataTransfer.getData("Text") method.
+			This method will return any data that was set to the same type in the setData() method
+			The dragged data is the id of the dragged element ("drag1")
+			Append the dragged element into the drop element
+			Call preventDefault() to prevent the browser default handling of the data
+			(default is open as link on drop)
+			*/
 			function drop(e)
 			{ 
+				// "Text" is used to use the "id" name of the draggable element
 				var data=e.dataTransfer.getData("Text");
 				e.target.appendChild(document.getElementById(data));
 				e.preventDefault();
@@ -63,11 +77,9 @@
 				<button onclick="videoNormal()">Normal</button>
 				<br /> 
 				<video id="idWestaVideo" width="320" height="240" ondrop="drop(event)" ondragover="dropAllow(event)">
-					<source src="asset/CSI_Intro_720p.mp4" type="video/mp4"></source>
-					<!-- 
 					<source src="asset/Vida_Arena_720p.mp4" type="video/mp4"></source>
-					 -->
-					<source src=".ogg" type="video/ogg"></source>
+					<source src="asset/CSI_Intro_720p.mp4" type="video/mp4"></source>
+					<source src="note_here.ogg" type="video/ogg"></source>
 					Your browser does not support the video tag. Following browser support video format(s).
 					
 					IE 9: mp4 only
